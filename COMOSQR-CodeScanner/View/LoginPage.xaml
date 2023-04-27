@@ -1,0 +1,106 @@
+﻿<Page x:Class="COMOSQR_CodeScanner.View.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:COMOSQR_CodeScanner.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LoginPage">
+
+    <Border CornerRadius="12">
+        <Border CornerRadius="10"                    
+            BorderThickness="2"
+            Opacity="0.95">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#00646E" Offset="0"/>
+                    <GradientStop Color="#0087BE" Offset="0.75"/>
+                    <GradientStop Color="#00BEDC" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#00646E" Offset="0"/>
+                    <GradientStop Color="#00557C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+
+                </Grid>
+
+                <StackPanel Width="305"
+                            Grid.Row="1"
+                            Orientation="Vertical"
+                            Margin="0,35,0,0">
+
+                    <TextBlock Text="COMOS QR-Code Scanner"
+                               Style="{StaticResource ResourceKey=Header}"
+                               Width="312"/>
+
+                    <TextBlock Text="Login"
+                               Style="{StaticResource ResourceKey=Subheader}"
+                               Margin="0,5,0,0"/>
+
+                    <!--Webserver-->
+                    <TextBlock Text="Webserver"
+                               Style="{StaticResource ResourceKey=Label}"                       
+                               Margin="0,35,0,0"/>
+
+                    <TextBox  Style="{StaticResource ResourceKey=TextBox}"
+                              Text="{Binding Path=LoginModel.Webserver, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                    <!--Username-->
+                    <TextBlock Text="Username"
+                               Style="{StaticResource ResourceKey=Label}"                          
+                               Margin="0,35,0,0"/>
+
+                    <TextBox Style="{StaticResource ResourceKey=TextBox}"
+                             Text="{Binding Path=LoginModel.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+                    <!--Passwort-->
+                    <TextBlock Text="Password"
+                               Style="{StaticResource ResourceKey=Label}"                           
+                               Margin="0,15,0,0"/>
+
+                    <PasswordBox Style="{StaticResource ResourceKey=PasswordBox}"
+                                 x:Name="pwbPassword">
+                    </PasswordBox>
+
+                    <!--Login Button-->
+                    <Button Content="LOG IN"
+                            Style="{StaticResource ResourceKey=Button}"
+                            Command="{Binding Path=LoginModel.DoLogin}"
+                            CommandParameter="{Binding ElementName=pwbPassword}"/>
+
+                    <!--Feedback-->
+                    <Label   Content="{Binding Path=Feedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource ResourceKey=FeedbackLabel}" Height="38"/>
+
+
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+
+    </Border>
+</Page>

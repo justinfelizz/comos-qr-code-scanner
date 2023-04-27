@@ -1,0 +1,9 @@
+﻿<Application x:Class="COMOSQR_CodeScanner.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:COMOSQR_CodeScanner"
+             StartupUri="View\LoginPage.xaml">
+    <Application.Resources>
+        <ResourceDictionary Source="View\Styling.xaml"/>
+    </Application.Resources>
+</Application>
