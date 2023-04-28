@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace COMOSQR_CodeScanner.Model
 {
-    internal class LoginModel
+    public class LoginModel
     {
         public string Webserver { get; set; }
         public string Username { get; set; }

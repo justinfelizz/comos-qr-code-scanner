@@ -22,7 +22,7 @@ namespace COMOSQR_CodeScanner.View
     {
         public LoginPage()
         {
-            var vm = new ViewModels.LoginViewModel();
+            var vm = new ViewModel.LoginViewModel();
             vm.Page = this;
             this.DataContext = vm;
             InitializeComponent();

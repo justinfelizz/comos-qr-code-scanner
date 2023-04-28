@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace COMOSQR_CodeScanner.Model
 {
-    internal class SessionModel
+    public class SessionModel
     {
         [JsonProperty("SessionId")]
         public string Id { get; set; }
