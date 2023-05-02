@@ -22,6 +22,9 @@ namespace COMOSQR_CodeScanner.View
     {
         public DocPage()
         {
+            var vm = new ViewModel.DocViewModel();
+            vm.Page = this;
+            this.DataContext = vm;
             InitializeComponent();
         }
     }

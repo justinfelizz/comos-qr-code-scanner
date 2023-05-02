@@ -50,6 +50,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -81,6 +82,7 @@
     <Compile Include="ComosAPI\APIDocService.cs" />
     <Compile Include="ComosAPI\APIProjectService.cs" />
     <Compile Include="ComosAPI\APISessionService.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="Interfaces\IClosable.cs" />
     <Compile Include="Model\DocModel.cs" />
     <Compile Include="Model\DocSearchModel.cs" />

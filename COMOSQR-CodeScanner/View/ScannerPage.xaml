@@ -27,6 +27,65 @@
                     <GradientStop Color="#00557C" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="5"/>
+                    </Grid.ColumnDefinitions>
+
+
+                </Grid>
+
+                <StackPanel Width="auto"
+                            Grid.Row="1"
+                            Orientation="Vertical"
+                            Margin="0,35,0,0">
+                    <!--Titel-->
+                    <TextBlock Text="COMOS QR-Code Scanner"
+                               Style="{StaticResource ResourceKey=Header}"
+                               Width="312"/>
+                    
+                    <!--Subtitel-->
+                    <TextBlock Text="QR-Code Scan"
+                               Style="{StaticResource ResourceKey=Subheader}"
+                               Margin="0,5,0,0"/>
+
+                    <!--Camera ComboBox-->
+                    <TextBlock Text="Kamera"
+                               Style="{StaticResource ResourceKey=Label}" Width="227"/>
+
+                    <ComboBox  x:Name="cboDevice"
+                               ItemsSource="{Binding Path = CameraDevices}"
+                               SelectedIndex="{Binding Path = SelectedIndex}"
+                               Width="229">
+                    </ComboBox>
+
+
+                    <!--Feedback-->
+                    <Label Content="{Binding Path=Feedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                   Style="{StaticResource ResourceKey=FeedbackLabel}" Height="26"/>
+
+                    <!--LiveImage-->
+                    <Image x:Name="pictureBox" Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,15,0,0" 
+                    Width="450" 
+                    Grid.ColumnSpan="3"
+                    Source="{Binding Path = Image}" Grid.RowSpan="2"/>
+
+
+                </StackPanel>
+            </Grid>
         </Border>
     </Border>
 </Page>
