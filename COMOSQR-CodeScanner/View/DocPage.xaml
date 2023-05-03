@@ -66,21 +66,23 @@
                     <!--GetDocuments Button-->
                     <Button Content="Projekte Laden"
                             Style="{StaticResource ResourceKey=Button}"
-                            Command="{Binding Path=ProjectModel.GetDocuments}"
-                    CommandParameter="{Binding ElementName=projectDatagrid}"/>
+                            Command="{Binding Path=DocSearchModel.GetDocuments}"
+                    CommandParameter="{Binding ElementName=documentDatagrid}"/>
 
 
                     <!--Feedback-->
-                    <Label Content="{Binding Path=Feedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                   Style="{StaticResource ResourceKey=FeedbackLabel}"/>
+                    <Label  Content="{Binding Path=Feedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource ResourceKey=FeedbackLabel}"/>
 
                     <!--Datagrid-->
-                    <DataGrid x:Name="projectDatagrid"
+                    <DataGrid x:Name="documentDatagrid"
                               Visibility="Collapsed"
                               Style="{StaticResource ResourceKey=DataGrid}"
-                              SelectedItem="{Binding Project, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="208" Width="304">
+                              SelectedItem="{Binding Path = SelectedDocument, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                              Height="208" 
+                              Width="304">
                         <DataGrid.InputBindings>
-                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ProjectSearchModel.SaveProject}"/>
+                            <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DocSearchModel.DownloadDocument}"/>
                         </DataGrid.InputBindings>
                     </DataGrid>
 

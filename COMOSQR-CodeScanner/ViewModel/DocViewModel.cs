@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
+using System.IO;
 
 namespace COMOSQR_CodeScanner.ViewModel
 {
     internal class DocViewModel : HTTPBaseViewModel
     {
-        public Page Page { get; set; }
-        public Window View { get; set; }
         private string _filePath;
+        public Window View { get; set; }
+        public Page Page { get; set; }
 
         public DocViewModel()
         {
@@ -29,11 +30,9 @@ namespace COMOSQR_CodeScanner.ViewModel
                 ProjectId = BaseProject.UID,
                 ProjectName = BaseProject.Name,
                 GetDocuments = new Commands.DelegateCommandGen<DataGrid>(canExecute: CheckGetDocument, execute: GetDocuments),
-                DownloadDocument = new Commands.DelegateCommand(canExecute: CheckSelectDocument, execute: DownloadDocument)
+                DownloadDocument = new Commands.DelegateCommand(canExecute: CheckSelectDocument, execute: DownloadDocument),
             };
         }
-
-       
 
         private Model.DocSearchModel _docSearchModel;
 
@@ -87,38 +86,41 @@ namespace COMOSQR_CodeScanner.ViewModel
                 }
             }
         }
-        public async void GetDocuments(DataGrid dataGrid)
+
+        public async void GetDocuments(DataGrid datagrid)
         {
             Feedback = "Dokumente werden geladen...";
+
+
 
             var documentResponse = await DocService.GetDocuments(BaseHttpClient, BaseDBID, DocSearchModel.ProjectId, BaseQRUID);
 
             if (documentResponse.IsSuccessStatusCode)
             {
-                string json = documentResponse.Content.ReadAsStringAsync().Result;
+                var json = documentResponse.Content.ReadAsStringAsync().Result;
                 var documents = JsonConvert.DeserializeObject<Model.Root>(json);
 
-                var dataTable = CreateDocumentDataTable(documents);
+                var datatable = CreateDocumentDataTable(documents);
 
+                datagrid.Visibility = Visibility.Visible;
+                datagrid.ItemsSource = datatable.AsDataView();
+                var count = datatable.Rows.Count;
 
-                dataGrid.Visibility = Visibility.Visible;
-                dataGrid.ItemsSource = dataTable.AsDataView();
-                var count = dataTable.Rows.Count;
+                Feedback = "Dokumente laden war erfolgreich! " + count + " Dokument(e) wurde(n) gefunden";
 
-                Feedback = "Fetching documents was successfull " + count + " documents were found";
-
-                View = GetParentView(dataGrid);
+                View = GetParentView(datagrid);
             }
 
             else
             {
-                Feedback = "Dokumente Laden fehlgeschlagen!";
+                Feedback = "Dokumente holen fehlgeschlagen: " + documentResponse.ReasonPhrase;
             }
+
         }
 
 
 
-        private DataTable CreateDocumentDataTable(Root documents)
+        private DataTable CreateDocumentDataTable(Model.Root documents)
         {
             var table = new DataTable();
 
@@ -142,26 +144,82 @@ namespace COMOSQR_CodeScanner.ViewModel
             return table;
         }
 
+        public async void DownloadDocument()
+        {
+            Feedback = "Dokument wird heruntergeladen...";
+
+            var docID = "U:29:" + SelectedDocument.Row.ItemArray[0] as string;
+
+
+            var response = await DocService.GetDocumentStream(BaseHttpClient, BaseDBID, BaseProject.UID, docID);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var stream = await response.Content.ReadAsStreamAsync();
+
+                OpenDocument(stream);
+            }
+            else
+            {
+                var error = ManageResponseCodes(response);
+                Feedback = "Download fehlgeschlagen: " + error;
+            }
+        }
+
+        private void OpenDocument(Stream stream)
+        {
+            Feedback = "Dokument wird geöffnet...";
+
+            if (!String.IsNullOrEmpty(_filePath))
+            {
+                using (StreamReader streamReader = new StreamReader(stream))
+                {
+                    try
+                    {
+                        using (var pdfStream = new FileStream(_filePath, FileMode.Create))
+                        {
+                            stream.CopyTo(pdfStream);
+                            System.Diagnostics.Process.Start(_filePath);
+
+                            Feedback = "Dokument öffnen war erfolgreich!";
+                        }
+                    }
+                    catch
+                    {
+                        Feedback = "Das Dokument konnte nicht geöffnet werden. Bitte versuchen Sie es erneut oder überprüfen Sie den Dateipfad.";
+                    }
+                }
+            }
+            else
+            {
+                Feedback = "Das gewünschte Dokument wurde nicht gefunden, bitte überprüfe den Dateipfad in App.config.";
+            }
+        }
+
         private bool CheckGetDocument()
         {
+
             if (!String.IsNullOrEmpty(BaseDBID) && BaseDBID == "db1")
             {
                 return true;
             }
-
             else
             {
-                Feedback = "Entweder wurde keine Datenbank gefunden oder die Datenbank ID ist falsch!";
+                Feedback = "Entweder wurde keine DatenbankID gefunden oder die DatenbankID ist falsch!";
                 return false;
             }
-        } private void DownloadDocument()
-        {
-            throw new NotImplementedException();
         }
 
         private bool CheckSelectDocument()
         {
-            throw new NotImplementedException();
+            if (SelectedDocument != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private Window GetParentView(DataGrid dataGrid)

@@ -67,13 +67,16 @@
                     <ComboBox  x:Name="cboDevice"
                                ItemsSource="{Binding Path = CameraDevices}"
                                SelectedIndex="{Binding Path = SelectedIndex}"
-                               Width="229">
+                               Width="229"
+                               DisplayMemberPath="Name">
                     </ComboBox>
 
 
                     <!--Feedback-->
-                    <Label Content="{Binding Path=Feedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                   Style="{StaticResource ResourceKey=FeedbackLabel}" Height="26"/>
+                    <Label  Content="{Binding Path=Feedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource ResourceKey=FeedbackLabel}" 
+                            Height="26"
+                            HorizontalAlignment="Center"/>
 
                     <!--LiveImage-->
                     <Image x:Name="pictureBox" Grid.Row="1"
