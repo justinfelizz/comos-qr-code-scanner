@@ -60,10 +60,11 @@
                                Style="{StaticResource ResourceKey=Subheader}"
                                Margin="0,5,0,0"/>
 
-                    <!--Camera ComboBox-->
+                    <!-- Text -->
                     <TextBlock Text="Kamera"
                                Style="{StaticResource ResourceKey=Label}" Width="227"/>
-
+                    
+                    <!--Camera ComboBox-->
                     <ComboBox  x:Name="cboDevice"
                                ItemsSource="{Binding Path = CameraDevices}"
                                SelectedIndex="{Binding Path = SelectedIndex}"

@@ -15,6 +15,7 @@ namespace COMOSQR_CodeScanner.ViewModel
     {
         public Page Page { get; set; }
 
+        // Konstruktor
         public LoginViewModel()
         {
             LoginModel = new Model.LoginModel()
@@ -62,6 +63,8 @@ namespace COMOSQR_CodeScanner.ViewModel
                 }
             }
         }
+        
+        // Login-Methode
         private async void Login(PasswordBox pwb)
         {
             Feedback = "Login läuft...";
@@ -109,7 +112,7 @@ namespace COMOSQR_CodeScanner.ViewModel
         }
 
 
-
+        // Überprüfung, ob Login-Methode ausgeführt werden kann/darf
         private bool CheckLogin()
         {
             if (!String.IsNullOrEmpty(LoginModel.Webserver) && !String.IsNullOrEmpty(LoginModel.Username))

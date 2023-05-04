@@ -51,30 +51,33 @@
                             Orientation="Vertical"
                             Margin="0,35,0,0">
 
+                    <!-- Titel -->
                     <TextBlock Text="COMOS QR-Code Scanner"
                                Style="{StaticResource ResourceKey=Header}"
                                Width="312"/>
 
+                    <!-- Subtitel -->
                     <TextBlock Text="Dokumente"
                                Style="{StaticResource ResourceKey=Subheader}"
                                Margin="0,5,0,0"/>
-
+                    
+                    <!-- Projektname -->
                     <TextBlock Text="{Binding Path = DocSearchModel.ProjectName}"
                                Style="{StaticResource ResourceKey=Subheader}"
                                Margin="0,5,0,0"/>
 
-                    <!--GetDocuments Button-->
+                    <!-- GetDocuments Button -->
                     <Button Content="Projekte Laden"
                             Style="{StaticResource ResourceKey=Button}"
                             Command="{Binding Path=DocSearchModel.GetDocuments}"
                     CommandParameter="{Binding ElementName=documentDatagrid}"/>
 
 
-                    <!--Feedback-->
+                    <!-- Feedback -->
                     <Label  Content="{Binding Path=Feedback, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource ResourceKey=FeedbackLabel}"/>
 
-                    <!--Datagrid-->
+                    <!-- Datagrid -->
                     <DataGrid x:Name="documentDatagrid"
                               Visibility="Collapsed"
                               Style="{StaticResource ResourceKey=DataGrid}"

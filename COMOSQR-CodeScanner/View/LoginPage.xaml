@@ -51,10 +51,12 @@
                             Orientation="Vertical"
                             Margin="0,35,0,0">
 
+                    <!-- Titel -->
                     <TextBlock Text="COMOS QR-Code Scanner"
                                Style="{StaticResource ResourceKey=Header}"
                                Width="312"/>
 
+                    <!-- Subtitel -->
                     <TextBlock Text="Login"
                                Style="{StaticResource ResourceKey=Subheader}"
                                Margin="0,5,0,0"/>

@@ -14,6 +14,7 @@ namespace COMOSQR_CodeScanner.ViewModel
 {
     internal class ScannerViewModel : BaseViewModel
     {
+        // Variablen, die benötigt werden
         private int _selectedIndex;
         private DispatcherTimer _timer = new DispatcherTimer();
         private BitmapImage _image;
@@ -46,6 +47,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             }
         }
         
+        // Konstruktor, führt Methode aus
         public ScannerViewModel()
         {
             LoadCameraDevices();
@@ -96,6 +98,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             SelectedIndex = 0;
         }
 
+        // Decoding des QR-Codes, wenn einer erkannt wurde.
         private void Timer_Tick(object sender, EventArgs e)
         {
             if(Image != null)

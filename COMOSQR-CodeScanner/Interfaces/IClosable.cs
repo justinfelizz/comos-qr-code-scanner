@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace COMOSQR_CodeScanner.Interfaces
 {
-    internal class IClosable
+    interface IClosable 
     {
+        void Close();
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Media;
 using System.IO;
+using System.Dynamic;
 
 namespace COMOSQR_CodeScanner.ViewModel
 {
@@ -20,6 +21,7 @@ namespace COMOSQR_CodeScanner.ViewModel
         public Window View { get; set; }
         public Page Page { get; set; }
 
+        //Konstruktor
         public DocViewModel()
         {
             Feedback = "";
@@ -87,6 +89,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             }
         }
 
+        // Methode zum Dokumente holen
         public async void GetDocuments(DataGrid datagrid)
         {
             Feedback = "Dokumente werden geladen...";
@@ -119,7 +122,7 @@ namespace COMOSQR_CodeScanner.ViewModel
         }
 
 
-
+        // Methode Erstellung eines Datatables --> bessere Darstellung
         private DataTable CreateDocumentDataTable(Model.Root documents)
         {
             var table = new DataTable();
@@ -144,6 +147,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             return table;
         }
 
+        // Methode für Dokumenten-Downlaod
         public async void DownloadDocument()
         {
             Feedback = "Dokument wird heruntergeladen...";
@@ -166,6 +170,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             }
         }
 
+        // Methode zum öffnen des Dokuments
         private void OpenDocument(Stream stream)
         {
             Feedback = "Dokument wird geöffnet...";
@@ -196,6 +201,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             }
         }
 
+        // Überprüfung, ob GetDocuments ausgeführt werden kann/darf
         private bool CheckGetDocument()
         {
 
@@ -209,6 +215,7 @@ namespace COMOSQR_CodeScanner.ViewModel
                 return false;
             }
         }
+        // Überprüfung, ob DownloadDocument ausgeführt werden kann/darf
 
         private bool CheckSelectDocument()
         {

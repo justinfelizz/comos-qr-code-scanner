@@ -19,6 +19,7 @@ namespace COMOSQR_CodeScanner.ViewModel
         public Page Page { get; set; }
         public Window View { get; set; }
         
+        // Konstruktor
         public ProjectViewModel() 
         {
             Feedback = "";
@@ -84,6 +85,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             }
         }
         
+        // Projekte werden in dieser Methode geholt und ins Datagrid gespeichert
         private async void GetProjects(DataGrid dataGrid)
         {
             Feedback = "Projekte werden geladen...";
@@ -123,6 +125,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             return view as Window;
         }
 
+        // Überprüfung, ob GetProjects ausgeführt werden kann/darf
         private bool CheckGetProjects()
         {
             if(ProjectSearchModel.DatabaseID != "db1")
@@ -135,6 +138,8 @@ namespace COMOSQR_CodeScanner.ViewModel
                 return true;
             }
         }
+        
+        // Ausgewähltes Projekt wird in BaseVariable gespeichert, Öffnen der nächsten Page
         private void SaveProject()
         {
             BaseProject = SelectedProject;
@@ -144,6 +149,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             Page.NavigationService.Navigate(uri);
         }
 
+        // Überprüfung, ob SaveProjects ausgeführt werden kann/darf
         private bool CheckSaveProject()
         {
             return true;
