@@ -67,7 +67,7 @@
                                Margin="0,5,0,0"/>
 
                     <!-- GetDocuments Button -->
-                    <Button Content="Projekte Laden"
+                    <Button Content="Dokumente Laden"
                             Style="{StaticResource ResourceKey=Button}"
                             Command="{Binding Path=DocSearchModel.GetDocuments}"
                     CommandParameter="{Binding ElementName=documentDatagrid}"/>

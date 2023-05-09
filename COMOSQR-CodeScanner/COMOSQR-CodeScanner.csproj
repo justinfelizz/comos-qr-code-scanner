@@ -83,7 +83,6 @@
     <Compile Include="ComosAPI\APIProjectService.cs" />
     <Compile Include="ComosAPI\APISessionService.cs" />
     <Compile Include="Global.cs" />
-    <Compile Include="Interfaces\IClosable.cs" />
     <Compile Include="Model\DocModel.cs" />
     <Compile Include="Model\DocSearchModel.cs" />
     <Compile Include="Model\LoginModel.cs" />

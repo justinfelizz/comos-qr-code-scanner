@@ -29,6 +29,7 @@ namespace COMOSQR_CodeScanner.ViewModel
             }
             set
             {
+                
                 _selectedIndex = value;
                 StartScan();
                 NotifyPropertyChanged(nameof(SelectedIndex));
